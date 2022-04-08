@@ -1,6 +1,6 @@
 let canvas;                                             // Die Variable für unser "canvas"
 let ctx;
-let character = new MovableObject();                    // "character" bekommt die Eigenschaften aus unserer Klasse.
+let character = new MovableObject();                    // "character" bekommt die Eigenschaften aus unserer Klasse "MovableObject".
 
 
 function init() {
