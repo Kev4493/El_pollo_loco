@@ -6,6 +6,9 @@ class World {
         new Chicken(),
         new Chicken(),
     ];
+    clouds = [                                                                          // Wir erstellen eine "Cloud" damit Sie angezeigt wird.
+        new Cloud()
+    ]
     canvas;
     ctx;
 
@@ -21,8 +24,12 @@ class World {
         this.ctx.drawImage(this.character.img, this.character.x, this.character.y, this.character.width, this.character.height);     // Wir zeichnen ein Bild vom Character auf dem Context.
 
 
-        this.enemies.forEach(enemy => {                                                                                    // Eine For-Each Schleife um alle 3 Chicken aus dem Array anzuzeigen
-            this.ctx.drawImage(enemy.img, enemy.x, enemy.y, enemy.width, enemy.height);                                    // Diese Zeile wird für JEDES ELEMENT aus dem Array ausgeführt.
+        this.enemies.forEach(enemy => {                                                                                    // Eine For-Each Schleife um alle 3 Chicken aus dem Array darzustellen
+            this.ctx.drawImage(enemy.img, enemy.x, enemy.y, enemy.width, enemy.height);                                    // Diese Zeile wird für JEDES ELEMENT aus dem Array "enemies" ausgeführt.
+        });
+
+        this.clouds.forEach(cloud => {                                                                                    // Eine For-Each Schleife um alle Clouds aus dem Array darzustellen
+            this.ctx.drawImage(cloud.img, cloud.x, cloud.y, cloud.width, cloud.height);                                   // Diese Zeile wird für JEDES ELEMENT aus dem Array "clouds" ausgeführt.
         });
         
         let self = this;
