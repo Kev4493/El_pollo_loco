@@ -8,7 +8,10 @@ class World {
     ];
     clouds = [                                                                          // Wir erstellen eine "Cloud" damit Sie angezeigt wird.
         new Cloud()
-    ]
+    ];
+    backgroundObjects = [
+        new BackgroundObject('img/5.Fondo/Capas/3.Fondo3/1.png', 0, 100)
+    ];
     canvas;
     ctx;
 
@@ -21,23 +24,31 @@ class World {
 
     draw() {                                                                                                                         // Diese Methode benutzt den Context und kann dort verschiedene Methoden aufrufen um unsere Welt zu malen.
         this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);                                                             // "clearRect" cleart jedes mal das Canvas.
-        this.ctx.drawImage(this.character.img, this.character.x, this.character.y, this.character.width, this.character.height);     // Wir zeichnen ein Bild vom Character auf dem Context.
 
+        this.addToMap(this.character);
 
-        this.enemies.forEach(enemy => {                                                                                    // Eine For-Each Schleife um alle 3 Chicken aus dem Array darzustellen
-            this.ctx.drawImage(enemy.img, enemy.x, enemy.y, enemy.width, enemy.height);                                    // Diese Zeile wird für JEDES ELEMENT aus dem Array "enemies" ausgeführt.
-        });
+        this.addObjectsToMap(this.enemies);
 
-        this.clouds.forEach(cloud => {                                                                                    // Eine For-Each Schleife um alle Clouds aus dem Array darzustellen
-            this.ctx.drawImage(cloud.img, cloud.x, cloud.y, cloud.width, cloud.height);                                   // Diese Zeile wird für JEDES ELEMENT aus dem Array "clouds" ausgeführt.
-        });
+        this.addObjectsToMap(this.clouds);
+
+        this.addObjectsToMap(this.backgroundObjects);
         
         let self = this;
         requestAnimationFrame(function() {                                              // "requestAnimationFrame" ruft die Funktion "draw" nun mehrmals auf.
             self.draw();                                                                // in der Funktion "requestAnimationFrame" funktioniert "this" nicht!
         });
+    }
 
 
+    addObjectsToMap(objects) {                                                          // Es wird durch das jeweilige Array itteriert (enemies, clouds, backgroundObjects).
+        objects.forEach(o => {
+            this.addToMap(o)                                                            // Und jedes Element aus dem Array ruft die "addToMap()" Funktion auf.
+        });
+    }
+
+
+    addToMap(mo) {                                                                       // Diese Funktion zeichnet das jeweilige img.
+        this.ctx.drawImage(mo.img, mo.x, mo.y, mo.width, mo.height);                     // Diese Zeile wird für JEDES ELEMENT aus dem jeweiligen Array ausgeführt.
     }
 
 }
