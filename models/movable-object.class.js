@@ -1,6 +1,6 @@
 class MovableObject {
-    x = 120;                                // X-Koordinate auf 120px - Standartwert
-    y = 250;                                // Y-Koordinate auf 400px - Standartwert
+    x = 120;                                // X-Koordinate auf dem Canvas - Standartwert
+    y = 250;                                // Y-Koordinate auf dem Canvas - Standartwert
     img;
     height = 150;
     width = 100;
