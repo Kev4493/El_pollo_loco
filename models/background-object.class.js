@@ -1,7 +1,7 @@
 class BackgroundObject extends MovableObject {
 
     width = 720;                                            // Standartbreite für BackgroundObjects.
-    height = 400;                                           // Standarthöhe für die BackgroundObjects.
+    height = 480;                                           // Standarthöhe für die BackgroundObjects.
 
     constructor(imagePath, x) {
         super().loadImage(imagePath);
