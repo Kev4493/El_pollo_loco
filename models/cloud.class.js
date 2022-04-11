@@ -9,6 +9,13 @@ class Cloud extends MovableObject {
 
         this.x = Math.random() * 500;                                                 // X-Koordinate wird zufällig Pixel abgeändert.  //Math.random = zufällige Zahl zw. 0 & 1 
 
+        this.animate();                                                               // Animationsfunktion für die Cloud wird aufgerufen.
+    }
+
+    animate() {
+        setInterval(() => {
+           this.x -= 0.15;                                                             // Die X-Koordinate wird um 0.15 px verändert (Wolken bewegen sich um 0.15 px nach links) 
+        }, 1000 / 60);                                                                 // Millisekunden in der die Funktion ausgeführt wird => Wird 60 mal pro Sekunde ausgeführt.
     }
 
 }
