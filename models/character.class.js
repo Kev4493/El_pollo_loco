@@ -13,8 +13,6 @@ class Character extends MovableObject{                                          
         'img/2.Secuencias_Personaje-Pepe-correcciขn/2.Secuencia_caminata/W-26.png',
     ]
 
-    currentImage = 0;
-
 
     constructor() {                                                                                      // Contructor Methode wird immer ausgeführt wenn ich ein Objekt erstelle
 
@@ -25,7 +23,7 @@ class Character extends MovableObject{                                          
         this.animate();
     }
 
-    animate() {
+    animate() {                                                                                           // ==> HIER WIRD DER CHARACTER ANIMIERT:
 
         setInterval(() => {                                                                               // Hier werden alle 6 Bilder hintereinander geladen:
             let i = this.currentImage % this.IMAGES_WALKING.length;                                       // let i = 7 % 6 => 1, Rest 1     // i = 0, 1, 2, 3, 4, 5, 0, 0, 1, 2, 3, 4, 5, 0     // Wir kommen nicht an das 7. Bild, welches nicht existiert.

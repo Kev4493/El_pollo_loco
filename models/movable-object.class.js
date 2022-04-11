@@ -5,6 +5,7 @@ class MovableObject {
     height = 150;
     width = 100;
     imageCache = {};
+    currentImage = 0;                       // Dient dazu um die Objekte zu animieren ==> siehe animate()
 
 
     loadImage(path) {                       // Eine Funktion um Bilder zu laden.
