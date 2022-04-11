@@ -13,9 +13,7 @@ class Cloud extends MovableObject {
     }
 
     animate() {
-        setInterval(() => {
-           this.x -= 0.15;                                                             // Die X-Koordinate wird um 0.15 px verändert (Wolken bewegen sich um 0.15 px nach links) 
-        }, 1000 / 60);                                                                 // Millisekunden in der die Funktion ausgeführt wird => Wird 60 mal pro Sekunde ausgeführt.
+        this.moveLeft();                                                               // Wir rufen die Funktion aus MovableObjects auf und nutzen sie hier.
     }
 
 }

@@ -6,6 +6,7 @@ class MovableObject {
     width = 100;
     imageCache = {};
     currentImage = 0;                       // Dient dazu um die Objekte zu animieren ==> siehe animate()
+    speed = 0.15;
 
 
     loadImage(path) {                       // Eine Funktion um Bilder zu laden.
@@ -29,6 +30,8 @@ class MovableObject {
 
 
     moveLeft() {
-
+        setInterval(() => {
+            this.x -= this.speed;                                                      // Die X-Koordinate wird um 0.15 px verändert (Wolken bewegen sich um 0.15 px nach links) 
+        }, 1000 / 60);                                                                 // Millisekunden in der die Funktion ausgeführt wird => Wird 60 mal pro Sekunde ausgeführt.
     }
 }
