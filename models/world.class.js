@@ -10,7 +10,9 @@ class World {
         new Cloud()
     ];
     backgroundObjects = [
-        new BackgroundObject('img/5.Fondo/Capas/3.Fondo3/1.png', 0, 100)
+        new BackgroundObject('img/5.Fondo/Capas/3.Fondo3/1.png', 0),
+        new BackgroundObject('img/5.Fondo/Capas/2.Fondo2/1.png', 0),
+        new BackgroundObject('img/5.Fondo/Capas/1.suelo-fondo1/1.png', 0)
     ];
     canvas;
     ctx;
@@ -25,13 +27,13 @@ class World {
     draw() {                                                                                                                         // Diese Methode benutzt den Context und kann dort verschiedene Methoden aufrufen um unsere Welt zu malen.
         this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);                                                             // "clearRect" cleart jedes mal das Canvas.
 
-        this.addToMap(this.character);
-
-        this.addObjectsToMap(this.enemies);
+        this.addObjectsToMap(this.backgroundObjects);
 
         this.addObjectsToMap(this.clouds);
 
-        this.addObjectsToMap(this.backgroundObjects);
+        this.addToMap(this.character);
+
+        this.addObjectsToMap(this.enemies);
         
         let self = this;
         requestAnimationFrame(function() {                                              // "requestAnimationFrame" ruft die Funktion "draw" nun mehrmals auf.
