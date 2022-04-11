@@ -25,16 +25,16 @@ class World {
     }
 
 
-    draw() {                                                                                                                         // Diese Methode benutzt den Context und kann dort verschiedene Methoden aufrufen um unsere Welt zu malen.
-        this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);                                                             // "clearRect" cleart jedes mal das Canvas.
+    draw() {                                                                            // Diese Methode benutzt den Context und kann dort verschiedene Methoden aufrufen um unsere Welt zu malen.
+        this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);                // "clearRect" cleart jedes mal das Canvas.
 
-        this.addObjectsToMap(this.backgroundObjects);
+        this.addObjectsToMap(this.backgroundObjects);                                   // => Lädt die Bilder aus "backgroundObjects" <=
 
-        this.addObjectsToMap(this.clouds);
+        this.addObjectsToMap(this.clouds);                                              // => Lädt die Bilder aus "clouds" <=
 
-        this.addToMap(this.character);
+        this.addToMap(this.character);                                                  // => Lädt die Bilder aus "character" <=
 
-        this.addObjectsToMap(this.enemies);
+        this.addObjectsToMap(this.enemies);                                             // => Lädt die Bilder aus "enemies" <=
         
         let self = this;
         requestAnimationFrame(function() {                                              // "requestAnimationFrame" ruft die Funktion "draw" nun mehrmals auf.
@@ -50,8 +50,8 @@ class World {
     }
 
 
-    addToMap(mo) {                                                                       // Diese Funktion zeichnet das jeweilige img.
-        this.ctx.drawImage(mo.img, mo.x, mo.y, mo.width, mo.height);                     // Diese Zeile wird für JEDES ELEMENT aus dem jeweiligen Array ausgeführt.
+    addToMap(mo) {                                                                       // Diese Funktion ZEICHNET DAS JEWEILIGE IMG.
+        this.ctx.drawImage(mo.img, mo.x, mo.y, mo.width, mo.height);                     // Diese Zeile wird für JEDES ELEMENT aus dem jeweiligen Array ausgeführt und zeichnet die IMG's auf das Canvas
     }
 
 }
