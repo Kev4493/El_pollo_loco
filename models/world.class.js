@@ -57,8 +57,21 @@ class World {
     }
 
 
-    addToMap(mo) {                                                                       // Diese Funktion ZEICHNET DAS JEWEILIGE IMG.
+    addToMap(mo) {                                                                       // Diese Funktion ZEICHNET DAS JEWEILIGE IMG. 
+
+        if (mo.otherDirection) {                                                         // Eine Funktion um das IMG zu spiegeln. // Hat unser Objekt eine otherDirection = true?
+            this.ctx.save();                                                             // Wir speichern die aktuellen Einstellungen von unserem Context.
+            this.ctx.translate(mo.width, 0);
+            this.ctx.scale(-1, 1);                                                       // Das Bild wird gespiegelt.
+            mo.x = mo.x * -1;
+        }
+
         this.ctx.drawImage(mo.img, mo.x, mo.y, mo.width, mo.height);                     // Diese Zeile wird für JEDES ELEMENT aus dem jeweiligen Array ausgeführt und zeichnet die IMG's auf das Canvas
+
+        if (mo.otherDirection) {                                                         // ist otherDirection auf true?
+            mo.x = mo.x * -1;
+            this.ctx.restore();                                                          // änderungen werden wieder Rückgängig gemacht.                                                         
+        }
     }
 
 }

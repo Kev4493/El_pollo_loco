@@ -32,10 +32,12 @@ class Character extends MovableObject{                                          
         setInterval(() => {                                                                               // Character bewegt sich nach rechts:
             if (this.world.keyboard.RIGHT) {                                                              // Die Animation wird nur abgespielt, wenn die RIGHT Taste gedrückt wird.
                 this.x += this.speed;                                                                     // X-Kordinate wird erhöht, damit Character nach rechts läuft.
+                this.otherDirection = false;                                                              // Beim Rechts laufen soll nicht gespiegelt werden
             }
 
             if (this.world.keyboard.LEFT) {                                                               // Character bewegt sich nach links
                 this.x -= this.speed;                                                                     // X-Kordinate wird verringert, damit Character nach links läuft.
+                this.otherDirection = true;                                                               // Bild wird gespiegelt beim links laufen.
             }
         }, 1000 / 60);
 

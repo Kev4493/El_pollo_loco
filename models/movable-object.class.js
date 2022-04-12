@@ -7,6 +7,7 @@ class MovableObject {
     imageCache = {};
     currentImage = 0;                       // Dient dazu um die Objekte zu animieren ==> siehe animate()
     speed = 0.15;
+    otherDirection = false;                 // Variable zum Spiegeln des Bildes. Standartmäßig auf false.
 
 
     loadImage(path) {                       // Eine Funktion um Bilder zu laden.
