@@ -18,6 +18,7 @@ class World {
     canvas;
     ctx;
     keyboard;
+    camera_x = 0;                                                                       // Eine Variable für die Verschiebung des Bildausschnittes.
 
     constructor(canvas, keyboard) {
         this.ctx = canvas.getContext('2d');                                             // getContext('2d') = stellt den 2D-Renderkontext für die Zeichenoberfläche eines "canvas" dar.
@@ -28,12 +29,14 @@ class World {
     }
 
     setWorld() {
-        this.character.world = this;
+        this.character.world = this;                                                    // Damit können wir von der Klasse Character auf die Klasse World zugreifen.
     }
 
 
     draw() {                                                                            // Diese Methode benutzt den Context und kann dort verschiedene Methoden aufrufen um unsere Welt zu malen.
         this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);                // "clearRect" cleart jedes mal das Canvas.
+
+        this.ctx.translate(this.camera_x, 0);                                           // Sorgt für die Verschiebeung des Bildausschnittes. default = 0
 
         this.addObjectsToMap(this.backgroundObjects);                                   // => Lädt die Bilder aus "backgroundObjects" <=
 
@@ -42,6 +45,8 @@ class World {
         this.addToMap(this.character);                                                  // => Lädt die Bilder aus "character" <=
 
         this.addObjectsToMap(this.enemies);                                             // => Lädt die Bilder aus "enemies" <=
+
+        this.ctx.translate(-this.camera_x, 0);                                          // Bildausschnitt wird zurückgesetzt. (- = Gegenteil).
         
         let self = this;
         requestAnimationFrame(function() {                                              // "requestAnimationFrame" ruft die Funktion "draw" nun mehrmals auf.

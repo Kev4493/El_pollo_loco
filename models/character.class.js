@@ -39,6 +39,7 @@ class Character extends MovableObject{                                          
                 this.x -= this.speed;                                                                     // X-Kordinate wird verringert, damit Character nach links läuft.
                 this.otherDirection = true;                                                               // Bild wird gespiegelt beim links laufen.
             }
+            this.world.camera_x = -this.x;
         }, 1000 / 60);
 
         setInterval(() => {                                                                               // WALK ANIMATION  // Hier werden alle 6 Bilder hintereinander geladen:
