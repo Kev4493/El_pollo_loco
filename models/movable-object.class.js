@@ -13,11 +13,11 @@ class MovableObject {
 
     applyGravity() {
         setInterval(() => {
-            if(this.isAboveGround()) {
+            if (this.isAboveGround() || this.speedY > 0) {
                 this.y -= this.speedY;
                 this.speedY -= this.acceleration;
             }
-        }, 1000/25);                        // wird 25x pro Sekunde ausgeführt.
+        }, 1000 / 25);                        // wird 25x pro Sekunde ausgeführt.
     }
 
     isAboveGround() {
@@ -48,13 +48,16 @@ class MovableObject {
 
 
     moveRight() {
-        console.log('Moving right')
+        this.x += this.speed;                                                                     // X-Kordinate wird erhöht, damit Character nach rechts läuft.
     };
 
 
     moveLeft() {
-        setInterval(() => {
-            this.x -= this.speed;                                                      // Die X-Koordinate wird um 0.15 px verändert (Wolken bewegen sich um 0.15 px nach links) 
-        }, 1000 / 60);                                                                 // Millisekunden in der die Funktion ausgeführt wird => Wird 60 mal pro Sekunde ausgeführt.
+        this.x -= this.speed;                                                                     // X-Kordinate wird verringert, damit Character nach links läuft.
+    }
+
+    jump() {
+        this.speedY = 30;
     }
 }
+

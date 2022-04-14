@@ -1,6 +1,6 @@
 class Character extends MovableObject{                                                                   // Alle Eigenschaften von "Movable Object sind in dieser Klasse/Objekt"
 
-    y = 80;                                                                                             // Y-Koordinate an der das Character-IMG ausgerichtet wird. (Wert aus MovableObject überschrieben)
+    y = 180;                                                                                              // Y-Koordinate an der das Character-IMG ausgerichtet wird. (Wert aus MovableObject überschrieben)
     height = 250;                                                                                        // Höhe des Character-IMG aus MovableObject überschrieben
     speed = 10;                                                                                          // Speed wird überschrieben, damit Character schneller läuft.
 
@@ -47,23 +47,29 @@ class Character extends MovableObject{                                          
 
         setInterval(() => {                                                                               // Character bewegt sich nach rechts:
             this.walking_sound.pause();
+
             if (this.world.keyboard.RIGHT && this.x < this.world.level.level_end_x) {                     // Die Animation wird nur abgespielt, wenn die RIGHT Taste gedrückt wird.
-                this.x += this.speed;                                                                     // X-Kordinate wird erhöht, damit Character nach rechts läuft.
+                this.moveRight();
                 this.otherDirection = false;                                                              // Beim Rechts laufen soll nicht gespiegelt werden
                 this.walking_sound.play();
             }
 
             if (this.world.keyboard.LEFT && this.x > 0) {                                                 // Character bewegt sich nach links wenn LEFT gedrückt ist und X-Koordinate > 0 ist.
-                this.x -= this.speed;                                                                     // X-Kordinate wird verringert, damit Character nach links läuft.
+                this.moveLeft();                                                                          // Wir rufen die Funktion aus MovableObects auf.
                 this.otherDirection = true;                                                               // Bild wird gespiegelt beim links laufen.
                 this.walking_sound.play();
             }
+
+            if (this.world.keyboard.SPACE && !this.isAboveGround()) {                                      // Ist die Pfeiltaste nach OBEN gedrückt und unser Character ist NICHT über dem Boden?
+                this.jump();                                                                               // Dann spring!
+            }
+
             this.world.camera_x = -this.x +100;
         }, 1000 / 60);
 
 
         setInterval(() => {                                                                               // WALK ANIMATION & JUMPING ANIMATION  // Hier werden alle Bilder hintereinander geladen:
-            
+
             if(this.isAboveGround()) {                                                                    // Befindet sich der Character in der Luft?
                 this.playAnimation(this.IMAGES_JUMPING);                                                  // Dann zeigen wir diese Animation an!
             } else {                                                                                      // ansonsten..
@@ -76,6 +82,6 @@ class Character extends MovableObject{                                          
 
 
     jump() {
-
+        this.speedY = 30;
     }
 };

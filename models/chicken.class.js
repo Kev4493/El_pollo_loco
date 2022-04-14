@@ -27,11 +27,14 @@ class Chicken extends MovableObject {                                           
 
     animate() {                                                                                           // ==> HIER WIRD DAS CHICKEN ANIMIERT:
 
-        this.moveLeft();                                                                                  // Wir rufen die Funktion aus MovableObjects auf und nutzen sie hier.
+        setInterval(() => {                                                                               // Chicken soll sich mit 60 Frames pro Sekunde nach links bewegen.
+            this.moveLeft();                                                                              // Wir rufen die Funktion aus MovableObjects auf und nutzen sie hier.
+        }, 1000 / 60);
 
         setInterval(() => {                                                                               // Hier werden alle 3 Bilder hintereinander geladen:
             this.playAnimation(this.IMAGES_WALKING);
         }, 200);
+
     }
 
 
