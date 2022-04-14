@@ -30,6 +30,18 @@ class MovableObject {
         this.img.src = path;                // Wir laden "path" in die Variable (wird dann aus der Klasse Character, Chicken, Clouds... übergeben)
     }
 
+    draw(ctx) {
+        ctx.drawImage(this.img, this.x, this.y, this.width, this.height);                     // Diese Zeile wird für JEDES ELEMENT aus dem jeweiligen Array ausgeführt und zeichnet die IMG's auf das Canvas
+    }
+
+    drawFrame(ctx) {
+        ctx.beginPath();
+        ctx.lineWidth = '5';
+        ctx.strokeStyle = 'blue';
+        ctx.rect(this.x, this.y, this.width, this.height);
+        ctx.stroke();
+    }
+
 
     loadImages(arr) {                       // Wir bekommen das Array aus loadImages übergeben (bspw. aus Character)
         arr.forEach((path) => {             // Wir iterrieren durch das Array und bekommen im ersten Durchlauf den ersten Pfad übergeben
