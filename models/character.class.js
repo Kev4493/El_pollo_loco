@@ -1,8 +1,7 @@
 class Character extends MovableObject{                                                                   // Alle Eigenschaften von "Movable Object sind in dieser Klasse/Objekt"
 
-    y = 90;                                                                                              // Y-Koordinate an der das Character-IMG ausgerichtet wird. (Wert aus MovableObject überschrieben)
-    height = 350;                                                                                        // Höhe des Character-IMG aus MovableObject überschrieben
-    width = 180;                                                                                         // Breite des Character-IMG aus MovableObject überschrieben.
+    y = 80;                                                                                             // Y-Koordinate an der das Character-IMG ausgerichtet wird. (Wert aus MovableObject überschrieben)
+    height = 250;                                                                                        // Höhe des Character-IMG aus MovableObject überschrieben
     speed = 10;                                                                                          // Speed wird überschrieben, damit Character schneller läuft.
 
     IMAGES_WALKING = [                                                                                   // Lädt alle 6 Bilder unseres Characters
@@ -11,10 +10,24 @@ class Character extends MovableObject{                                          
         'img/2.Secuencias_Personaje-Pepe-correcciขn/2.Secuencia_caminata/W-23.png',
         'img/2.Secuencias_Personaje-Pepe-correcciขn/2.Secuencia_caminata/W-24.png',
         'img/2.Secuencias_Personaje-Pepe-correcciขn/2.Secuencia_caminata/W-25.png',
-        'img/2.Secuencias_Personaje-Pepe-correcciขn/2.Secuencia_caminata/W-26.png',
+        'img/2.Secuencias_Personaje-Pepe-correcciขn/2.Secuencia_caminata/W-26.png'
     ];
 
+    IMAGES_JUMPING = [
+        'img/2.Secuencias_Personaje-Pepe-correcciขn/3.Secuencia_salto/J-31.png',
+        'img/2.Secuencias_Personaje-Pepe-correcciขn/3.Secuencia_salto/J-32.png',
+        'img/2.Secuencias_Personaje-Pepe-correcciขn/3.Secuencia_salto/J-33.png',
+        'img/2.Secuencias_Personaje-Pepe-correcciขn/3.Secuencia_salto/J-34.png',
+        'img/2.Secuencias_Personaje-Pepe-correcciขn/3.Secuencia_salto/J-35.png',
+        'img/2.Secuencias_Personaje-Pepe-correcciขn/3.Secuencia_salto/J-36.png',
+        'img/2.Secuencias_Personaje-Pepe-correcciขn/3.Secuencia_salto/J-37.png',
+        'img/2.Secuencias_Personaje-Pepe-correcciขn/3.Secuencia_salto/J-38.png',
+        'img/2.Secuencias_Personaje-Pepe-correcciขn/3.Secuencia_salto/J-39.png',
+        'img/2.Secuencias_Personaje-Pepe-correcciขn/3.Secuencia_salto/J-40.png'
+    ]
+
     world;                                                                                               // Damit können wir auf die Variablen aus "world" zugreifen u.A auch auf das "keyboard"
+    walking_sound = new Audio('audio/walk.mp3');
 
 
     constructor() {                                                                                      // Contructor Methode wird immer ausgeführt wenn ich ein Objekt erstelle
@@ -23,31 +36,40 @@ class Character extends MovableObject{                                          
 
         this.loadImages(this.IMAGES_WALKING);                                                            // "super()" geht nur 1x danach geht auch "this"
 
+        this.loadImages(this.IMAGES_JUMPING);
+
+        this.applyGravity();
+
         this.animate();
     }
 
     animate() {                                                                                           // ==> HIER WIRD DER CHARACTER ANIMIERT:
 
-        
         setInterval(() => {                                                                               // Character bewegt sich nach rechts:
-            if (this.world.keyboard.RIGHT) {                                                              // Die Animation wird nur abgespielt, wenn die RIGHT Taste gedrückt wird.
+            this.walking_sound.pause();
+            if (this.world.keyboard.RIGHT && this.x < this.world.level.level_end_x) {                     // Die Animation wird nur abgespielt, wenn die RIGHT Taste gedrückt wird.
                 this.x += this.speed;                                                                     // X-Kordinate wird erhöht, damit Character nach rechts läuft.
                 this.otherDirection = false;                                                              // Beim Rechts laufen soll nicht gespiegelt werden
+                this.walking_sound.play();
             }
 
-            if (this.world.keyboard.LEFT) {                                                               // Character bewegt sich nach links
+            if (this.world.keyboard.LEFT && this.x > 0) {                                                 // Character bewegt sich nach links wenn LEFT gedrückt ist und X-Koordinate > 0 ist.
                 this.x -= this.speed;                                                                     // X-Kordinate wird verringert, damit Character nach links läuft.
                 this.otherDirection = true;                                                               // Bild wird gespiegelt beim links laufen.
+                this.walking_sound.play();
             }
-            this.world.camera_x = -this.x;
+            this.world.camera_x = -this.x +100;
         }, 1000 / 60);
 
-        setInterval(() => {                                                                               // WALK ANIMATION  // Hier werden alle 6 Bilder hintereinander geladen:
-            if (this.world.keyboard.RIGHT || this.world.keyboard.LEFT) {                                  // Die Animation wird nur abgespielt, wenn die RIGHT oder LEFT Taste gedrückt wird.
-                let i = this.currentImage % this.IMAGES_WALKING.length;                                   // let i = 7 % 6 => 1, Rest 1     // i = 0, 1, 2, 3, 4, 5, 0, 0, 1, 2, 3, 4, 5, 0     // Wir kommen nicht an das 7. Bild, welches nicht existiert.
-                let path = this.IMAGES_WALKING[i];                                                        // let path soll IMAGES_WALKING an Stelle 0 sein
-                this.img = this.imageCache[path];                                                         // Das Bild aus dem IMG soll dem Bild aus dem Cache entsprechen                                                             
-                this.currentImage++;                                                                      // "currentImage" wird in jedem durchgang um 1 erhöht
+
+        setInterval(() => {                                                                               // WALK ANIMATION & JUMPING ANIMATION  // Hier werden alle Bilder hintereinander geladen:
+            
+            if(this.isAboveGround()) {                                                                    // Befindet sich der Character in der Luft?
+                this.playAnimation(this.IMAGES_JUMPING);                                                  // Dann zeigen wir diese Animation an!
+            } else {                                                                                      // ansonsten..
+                if (this.world.keyboard.RIGHT || this.world.keyboard.LEFT) {                              // Ist RIGHT oder LEFT gedrückt?
+                    this.playAnimation(this.IMAGES_WALKING);                                              // Dann zeigen wir diese Animation!
+                }
             }
         }, 50);                                                                                           // Alle 50 millisekunden wird das Bild ausgetauscht => Beine des Characters bewegen sich schneller! 
     }

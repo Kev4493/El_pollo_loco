@@ -1,9 +1,7 @@
 class World {
 
     character = new Character();                                                        // Der Variable "character" wird das "Character-Objekt" zugewiesen.
-    enemies = level1.enemies;
-    clouds = level1.clouds;
-    backgroundObjects = level1.backgroundObjects;
+    level = level1;                                                                     // Damit können wir auf alle Variablen aus unserem Level zugreifen.
     canvas;
     ctx;
     keyboard;
@@ -27,13 +25,13 @@ class World {
 
         this.ctx.translate(this.camera_x, 0);                                           // Sorgt für die Verschiebeung des Bildausschnittes. default = 0
 
-        this.addObjectsToMap(this.backgroundObjects);                                   // => Lädt die Bilder aus "backgroundObjects" <=
+        this.addObjectsToMap(this.level.backgroundObjects);                             // => Lädt die Bilder aus "backgroundObjects" <=
 
-        this.addObjectsToMap(this.clouds);                                              // => Lädt die Bilder aus "clouds" <=
+        this.addObjectsToMap(this.level.clouds);                                        // => Lädt die Bilder aus "clouds" <=
 
         this.addToMap(this.character);                                                  // => Lädt die Bilder aus "character" <=
 
-        this.addObjectsToMap(this.enemies);                                             // => Lädt die Bilder aus "enemies" <=
+        this.addObjectsToMap(this.level.enemies);                                       // => Lädt die Bilder aus "enemies" <=
 
         this.ctx.translate(-this.camera_x, 0);                                          // Bildausschnitt wird zurückgesetzt. (- = Gegenteil).
         

@@ -19,7 +19,7 @@ class Chicken extends MovableObject {                                           
 
         this.x = 200 + Math.random() * 500;                                                              // Math.random = zufällige Zahl zw. 0 & 1 
 
-        this.speed = 0.15 + Math.random() * 0.5;                                                        // Damit die Chicken mit einer random Geschwindigkeit laufen ändern wir hier den Standartwert ab.
+        this.speed = 0.15 + Math.random() * 0.5;                                                         // Damit die Chicken mit einer random Geschwindigkeit laufen ändern wir hier den Standartwert ab.
 
         this.animate();
     }
@@ -30,10 +30,7 @@ class Chicken extends MovableObject {                                           
         this.moveLeft();                                                                                  // Wir rufen die Funktion aus MovableObjects auf und nutzen sie hier.
 
         setInterval(() => {                                                                               // Hier werden alle 3 Bilder hintereinander geladen:
-            let i = this.currentImage % this.IMAGES_WALKING.length;                                       // let i = 6 % 6 => 1, Rest 1     // i = 0, 1, 2, 3, 4, 5, 0, 0, 1, 2, 3, 4, 5, 0     // Wir kommen nicht an das 7. Bild, welches nicht existiert.
-            let path = this.IMAGES_WALKING[i];                                                            // let path soll IMAGES_WALKING an Stelle 0 sein
-            this.img = this.imageCache[path];                                                             // Das Bild aus dem IMG soll dem Bild aus dem Cache entsprechen                                                             
-            this.currentImage++;                                                                          // "currentImage" wird in jedem durchgang um 1 erhöht
+            this.playAnimation(this.IMAGES_WALKING);
         }, 200);
     }
 

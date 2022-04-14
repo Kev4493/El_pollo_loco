@@ -8,6 +8,21 @@ class MovableObject {
     currentImage = 0;                       // Dient dazu um die Objekte zu animieren ==> siehe animate()
     speed = 0.15;
     otherDirection = false;                 // Variable zum Spiegeln des Bildes. Standartmäßig auf false.
+    speedY = 0;                             // Variable für die Geschwindigkeit des Falls nach unten.
+    acceleration = 2.5;                     // Variable dafür, wie schnell das Objekt beschleunigt wird.
+
+    applyGravity() {
+        setInterval(() => {
+            if(this.isAboveGround()) {
+                this.y -= this.speedY;
+                this.speedY -= this.acceleration;
+            }
+        }, 1000/25);                        // wird 25x pro Sekunde ausgeführt.
+    }
+
+    isAboveGround() {
+        return this.y < 180;
+    }
 
 
     loadImage(path) {                       // Eine Funktion um Bilder zu laden.
@@ -22,6 +37,13 @@ class MovableObject {
             img.src = path;                 // Wir laden den Pfad in das IMG Objekt
             this.imageCache[path] = img;    // ImageCache wird geuptdatet und das erste Bild aus dem Array ist nun im ersten Durchlauf im ImageCache           // "this" weil wir auf DIESE Variable oben von dem Objekt zugreifen. Nur mit "this" kann man auf Variablen außerhalb der Funktion zugreifen.
         });
+    }
+
+    playAnimation(images) {                                                                       // Funktionen um die Animationen abzuspielen.
+        let i = this.currentImage % this.IMAGES_WALKING.length;                                   // let i = 7 % 6 => 1, Rest 1     // i = 0, 1, 2, 3, 4, 5, 0, 0, 1, 2, 3, 4, 5, 0     // Wir kommen nicht an das 7. Bild, welches nicht existiert.
+        let path = images[i];                                                                     // let path soll IMAGES_WALKING an Stelle 0 sein
+        this.img = this.imageCache[path];                                                         // Das Bild aus dem IMG soll dem Bild aus dem Cache entsprechen                                                             
+        this.currentImage++;                                                                      // "currentImage" wird in jedem durchgang um 1 erhöht
     }
 
 
