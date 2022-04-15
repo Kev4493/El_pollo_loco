@@ -6,6 +6,7 @@ class World {
     ctx;
     keyboard;
     camera_x = 0;                                                                       // Eine Variable für die Verschiebung des Bildausschnittes.
+    statusBar = new Statusbar();
 
     constructor(canvas, keyboard) {
         this.ctx = canvas.getContext('2d');                                             // getContext('2d') = stellt den 2D-Renderkontext für die Zeichenoberfläche eines "canvas" dar.
@@ -25,6 +26,7 @@ class World {
             this.level.enemies.forEach((enemy) => {
                 if (this.character.isColliding(enemy)) {
                     this.character.hit();
+                    this.statusBar.setPercentage(this.character.energy);
                 }
             });
         }, 200);
@@ -39,6 +41,12 @@ class World {
         this.addObjectsToMap(this.level.backgroundObjects);                             // => Lädt die Bilder aus "backgroundObjects" <=
 
         this.addObjectsToMap(this.level.clouds);                                        // => Lädt die Bilder aus "clouds" <=
+
+        this.ctx.translate(-this.camera_x, 0);                                          // Bildausschnitt wird zurückgesetzt. (- = Gegenteil).
+
+        this.addToMap(this.statusBar);                                                  // => Lädt die Bilder aus "statusBar" <=
+
+        this.ctx.translate(this.camera_x, 0);                                           // Sorgt für die Verschiebeung des Bildausschnittes. default = 0
 
         this.addToMap(this.character);                                                  // => Lädt die Bilder aus "character" <=
 
