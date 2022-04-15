@@ -10,6 +10,7 @@ class MovableObject {
     otherDirection = false;                                                                       // Variable zum Spiegeln des Bildes. Standartmäßig auf false.
     speedY = 0;                                                                                   // Variable für die Geschwindigkeit des Falls nach unten.
     acceleration = 2.5;                                                                           // Variable dafür, wie schnell das Objekt beschleunigt wird.
+    energy = 100;
 
     applyGravity() {
         setInterval(() => {
@@ -45,11 +46,23 @@ class MovableObject {
     }
 
     // character.isColliding(chicken);
-    isColliding(mo) {
+    isColliding(mo) {                                                                             // Hier finden wir raus, ob Objekte kolidieren.
         return this.x + this.width > mo.x &&
             this.y + this.height > mo.y &&
             this.x < mo.x &&
             this.y < mo.y + mo.height;
+    }
+
+
+    hit() {                                                                                       // Wenn der Character Kollidiert und Energy verliert.
+        this.energy -= 5;
+        if (this.energy < 0) {
+            this.energy = 0;
+        }
+    }
+
+    isDead() {
+        return this.energy == 0;
     }
 
 

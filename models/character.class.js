@@ -1,4 +1,4 @@
-class Character extends MovableObject{                                                                   // Alle Eigenschaften von "Movable Object sind in dieser Klasse/Objekt"
+class Character extends MovableObject {                                                                   // Alle Eigenschaften von "Movable Object sind in dieser Klasse/Objekt"
 
     y = 180;                                                                                             // Y-Koordinate an der das Character-IMG ausgerichtet wird. (Wert aus MovableObject überschrieben)
     height = 250;                                                                                        // Höhe des Character-IMG aus MovableObject überschrieben
@@ -26,6 +26,16 @@ class Character extends MovableObject{                                          
         'img/2.Secuencias_Personaje-Pepe-correcciขn/3.Secuencia_salto/J-40.png'
     ]
 
+    IMAGES_DEAD = [
+        'img/2.Secuencias_Personaje-Pepe-correcciขn/5.Muerte/D-51.png',
+        'img/2.Secuencias_Personaje-Pepe-correcciขn/5.Muerte/D-52.png',
+        'img/2.Secuencias_Personaje-Pepe-correcciขn/5.Muerte/D-53.png',
+        'img/2.Secuencias_Personaje-Pepe-correcciขn/5.Muerte/D-54.png',
+        'img/2.Secuencias_Personaje-Pepe-correcciขn/5.Muerte/D-55.png',
+        'img/2.Secuencias_Personaje-Pepe-correcciขn/5.Muerte/D-56.png',
+        'img/2.Secuencias_Personaje-Pepe-correcciขn/5.Muerte/D-57.png'
+    ];
+
     world;                                                                                               // Damit können wir auf die Variablen aus "world" zugreifen u.A auch auf das "keyboard"
     walking_sound = new Audio('audio/walk.mp3');
 
@@ -37,6 +47,8 @@ class Character extends MovableObject{                                          
         this.loadImages(this.IMAGES_WALKING);                                                            // "super()" geht nur 1x danach geht auch "this"
 
         this.loadImages(this.IMAGES_JUMPING);
+
+        this.loadImages(this.IMAGES_DEAD);
 
         this.applyGravity();
 
@@ -64,13 +76,15 @@ class Character extends MovableObject{                                          
                 this.jump();                                                                               // Dann spring!
             }
 
-            this.world.camera_x = -this.x +100;
+            this.world.camera_x = -this.x + 100;
         }, 1000 / 60);
 
 
         setInterval(() => {                                                                               // WALK ANIMATION & JUMPING ANIMATION  // Hier werden alle Bilder hintereinander geladen:
 
-            if(this.isAboveGround()) {                                                                    // Befindet sich der Character in der Luft?
+            if (this.isDead()) {
+                this.playAnimation(this.IMAGES_DEAD); 
+            } else if (this.isAboveGround()) {                                                                    // Befindet sich der Character in der Luft?
                 this.playAnimation(this.IMAGES_JUMPING);                                                  // Dann zeigen wir diese Animation an!
             } else {                                                                                      // ansonsten..
                 if (this.world.keyboard.RIGHT || this.world.keyboard.LEFT) {                              // Ist RIGHT oder LEFT gedrückt?
