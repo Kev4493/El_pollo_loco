@@ -11,6 +11,7 @@ class MovableObject {
     speedY = 0;                                                                                   // Variable für die Geschwindigkeit des Falls nach unten.
     acceleration = 2.5;                                                                           // Variable dafür, wie schnell das Objekt beschleunigt wird.
     energy = 100;
+    lastHit = 0;
 
     applyGravity() {
         setInterval(() => {
@@ -58,7 +59,15 @@ class MovableObject {
         this.energy -= 5;
         if (this.energy < 0) {
             this.energy = 0;
+        } else {
+            this.lastHit = new Date().getTime();
         }
+    }
+
+    isHurt() {
+        let timepassed = new Date().getTime() - this.lastHit;                                     // Differenz in Millisekunden
+        timepassed = timepassed / 1000;                                                           // Differenz in Sekunden
+        return timepassed < 1;
     }
 
     isDead() {
@@ -75,7 +84,7 @@ class MovableObject {
     }
 
     playAnimation(images) {                                                                       // Funktionen um die Animationen abzuspielen.
-        let i = this.currentImage % this.IMAGES_WALKING.length;                                   // let i = 7 % 6 => 1, Rest 1     // i = 0, 1, 2, 3, 4, 5, 0, 0, 1, 2, 3, 4, 5, 0     // Wir kommen nicht an das 7. Bild, welches nicht existiert.
+        let i = this.currentImage % images.length;                                                // let i = 7 % 6 => 1, Rest 1     // i = 0, 1, 2, 3, 4, 5, 0, 0, 1, 2, 3, 4, 5, 0     // Wir kommen nicht an das 7. Bild, welches nicht existiert.
         let path = images[i];                                                                     // let path soll IMAGES_WALKING an Stelle 0 sein
         this.img = this.imageCache[path];                                                         // Das Bild aus dem IMG soll dem Bild aus dem Cache entsprechen                                                             
         this.currentImage++;                                                                      // "currentImage" wird in jedem durchgang um 1 erhöht

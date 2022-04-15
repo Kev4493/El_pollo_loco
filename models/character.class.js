@@ -36,6 +36,12 @@ class Character extends MovableObject {                                         
         'img/2.Secuencias_Personaje-Pepe-correcciขn/5.Muerte/D-57.png'
     ];
 
+    IMAGES_HURT = [
+        'img/2.Secuencias_Personaje-Pepe-correcciขn/4.Herido/H-41.png',
+        'img/2.Secuencias_Personaje-Pepe-correcciขn/4.Herido/H-42.png',
+        'img/2.Secuencias_Personaje-Pepe-correcciขn/4.Herido/H-43.png'
+    ]
+
     world;                                                                                               // Damit können wir auf die Variablen aus "world" zugreifen u.A auch auf das "keyboard"
     walking_sound = new Audio('audio/walk.mp3');
 
@@ -48,6 +54,8 @@ class Character extends MovableObject {                                         
 
         this.loadImages(this.IMAGES_JUMPING);
 
+        this.loadImages(this.IMAGES_HURT);
+
         this.loadImages(this.IMAGES_DEAD);
 
         this.applyGravity();
@@ -55,7 +63,7 @@ class Character extends MovableObject {                                         
         this.animate();
     }
 
-    animate() {                                                                                           // ==> HIER WIRD DER CHARACTER ANIMIERT:
+    animate() {                                                                                           // ==> HIER WIRD DER CHARACTER ANIMIERT und bewegt sich in eine Richtung:
 
         setInterval(() => {                                                                               // Character bewegt sich nach rechts:
             this.walking_sound.pause();
@@ -83,8 +91,10 @@ class Character extends MovableObject {                                         
         setInterval(() => {                                                                               // WALK ANIMATION & JUMPING ANIMATION  // Hier werden alle Bilder hintereinander geladen:
 
             if (this.isDead()) {
-                this.playAnimation(this.IMAGES_DEAD); 
-            } else if (this.isAboveGround()) {                                                                    // Befindet sich der Character in der Luft?
+                this.playAnimation(this.IMAGES_DEAD);
+            } else if (this.isHurt()) {
+                this.playAnimation(this.IMAGES_HURT);
+            } else if (this.isAboveGround()) {                                                            // Befindet sich der Character in der Luft?
                 this.playAnimation(this.IMAGES_JUMPING);                                                  // Dann zeigen wir diese Animation an!
             } else {                                                                                      // ansonsten..
                 if (this.world.keyboard.RIGHT || this.world.keyboard.LEFT) {                              // Ist RIGHT oder LEFT gedrückt?
