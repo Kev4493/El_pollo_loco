@@ -13,10 +13,21 @@ class World {
         this.keyboard = keyboard;                                                       // Damit "keyboard" nicht nur innerhalb der Funktion ist, sondern auch von außen aufgerufen werden kann.
         this.draw();                                                                    // Die "draw" Methode wird ausgeführt.
         this.setWorld();
+        this.checkCollisions();
     }
 
     setWorld() {
         this.character.world = this;                                                    // Damit können wir von der Klasse Character auf die Klasse World zugreifen.
+    }
+
+    checkCollisions() {
+        setInterval(() => {
+            this.level.enemies.forEach( (enemy) => {
+                if (this.character.isColliding(enemy)) {
+                    console.log('Collision with Character ',enemy);
+                }
+            });
+        }, 200);
     }
 
 
@@ -36,7 +47,7 @@ class World {
         this.ctx.translate(-this.camera_x, 0);                                          // Bildausschnitt wird zurückgesetzt. (- = Gegenteil).
 
         let self = this;
-        requestAnimationFrame(function () {                                              // "requestAnimationFrame" ruft die Funktion "draw" nun mehrmals auf.
+        requestAnimationFrame(function () {                                             // "requestAnimationFrame" ruft die Funktion "draw" nun mehrmals auf.
             self.draw();                                                                // in der Funktion "requestAnimationFrame" funktioniert "this" nicht!
         });
     }
@@ -64,11 +75,11 @@ class World {
         }
     }
 
-    
+
     flipImage(mo) {
-        this.ctx.save();                                                             // Wir speichern die aktuellen Einstellungen von unserem Context.
+        this.ctx.save();                                                                  // Wir speichern die aktuellen Einstellungen von unserem Context.
         this.ctx.translate(mo.width, 0);
-        this.ctx.scale(-1, 1);                                                       // Das Bild wird gespiegelt.
+        this.ctx.scale(-1, 1);                                                            // Das Bild wird gespiegelt.
         mo.x = mo.x * -1;
     }
 

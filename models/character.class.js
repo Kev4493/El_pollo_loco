@@ -1,6 +1,6 @@
 class Character extends MovableObject{                                                                   // Alle Eigenschaften von "Movable Object sind in dieser Klasse/Objekt"
 
-    y = 180;                                                                                              // Y-Koordinate an der das Character-IMG ausgerichtet wird. (Wert aus MovableObject überschrieben)
+    y = 180;                                                                                             // Y-Koordinate an der das Character-IMG ausgerichtet wird. (Wert aus MovableObject überschrieben)
     height = 250;                                                                                        // Höhe des Character-IMG aus MovableObject überschrieben
     speed = 10;                                                                                          // Speed wird überschrieben, damit Character schneller läuft.
 

@@ -44,6 +44,14 @@ class MovableObject {
         }
     }
 
+    // character.isColliding(chicken);
+    isColliding(mo) {
+        return this.x + this.width > mo.x &&
+            this.y + this.height > mo.y &&
+            this.x < mo.x &&
+            this.y < mo.y + mo.height;
+    }
+
 
     loadImages(arr) {                                                                             // Wir bekommen das Array aus loadImages übergeben (bspw. aus Character)
         arr.forEach((path) => {                                                                   // Wir iterrieren durch das Array und bekommen im ersten Durchlauf den ersten Pfad übergeben
