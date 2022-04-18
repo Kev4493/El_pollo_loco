@@ -32,6 +32,10 @@ document.addEventListener('keydown', (e) => {          // Setzt die Taste die ge
         keyboard.SPACE = true;
     }
 
+    if (e.keyCode == 68) {
+        keyboard.D = true;
+    }
+
     console.log(event);
 });
 
@@ -53,8 +57,12 @@ document.addEventListener('keyup', (e) => {          // Setzt die Taste die losg
         keyboard.DOWN = false;
     }
 
-    if (e.keyCode == 32) {
+    if (e.keyCode == 32) { 
         keyboard.SPACE = false;
+    }
+
+    if (e.keyCode == 68) {
+        keyboard.D = false;
     }
 
     console.log(event);

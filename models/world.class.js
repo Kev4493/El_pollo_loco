@@ -7,6 +7,7 @@ class World {
     keyboard;
     camera_x = 0;                                                                       // Eine Variable für die Verschiebung des Bildausschnittes.
     statusBar = new Statusbar();
+    ThrowableObjects = [];
 
     constructor(canvas, keyboard) {
         this.ctx = canvas.getContext('2d');                                             // getContext('2d') = stellt den 2D-Renderkontext für die Zeichenoberfläche eines "canvas" dar.
@@ -14,22 +15,34 @@ class World {
         this.keyboard = keyboard;                                                       // Damit "keyboard" nicht nur innerhalb der Funktion ist, sondern auch von außen aufgerufen werden kann.
         this.draw();                                                                    // Die "draw" Methode wird ausgeführt.
         this.setWorld();
-        this.checkCollisions();
+        this.run();
     }
 
     setWorld() {
         this.character.world = this;                                                    // Damit können wir von der Klasse Character auf die Klasse World zugreifen.
     }
 
-    checkCollisions() {
+    run() {
         setInterval(() => {
-            this.level.enemies.forEach((enemy) => {
-                if (this.character.isColliding(enemy)) {
-                    this.character.hit();
-                    this.statusBar.setPercentage(this.character.energy);
-                }
-            });
+            this.checkCollisions();
+            this.checkThrowObjects();
         }, 200);
+    }
+
+    checkThrowObjects() {
+        if (this.keyboard.D) {
+            let bottle = new ThrowableObject(this.character.x + 100, this.character.y + 100);
+            this.ThrowableObjects.push(bottle);
+        }
+    }
+
+    checkCollisions() {
+        this.level.enemies.forEach((enemy) => {
+            if (this.character.isColliding(enemy)) {
+                this.character.hit();
+                this.statusBar.setPercentage(this.character.energy);
+            }
+        });
     }
 
 
@@ -51,6 +64,8 @@ class World {
         this.addToMap(this.character);                                                  // => Lädt die Bilder aus "character" <=
 
         this.addObjectsToMap(this.level.enemies);                                       // => Lädt die Bilder aus "enemies" <=
+
+        this.addObjectsToMap(this.ThrowableObjects);                                    // => Lädt die Bilder aus "ThrowableObjects" <=
 
         this.ctx.translate(-this.camera_x, 0);                                          // Bildausschnitt wird zurückgesetzt. (- = Gegenteil).
 
