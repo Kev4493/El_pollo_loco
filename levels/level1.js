@@ -34,5 +34,13 @@ const level1 = new Level(
         new BackgroundObject('img/5.Fondo/Capas/2.Fondo2/2.png', 719*3),
         new BackgroundObject('img/5.Fondo/Capas/1.suelo-fondo1/2.png', 719*3),
 
+    ],
+    [
+        new Bottle('img/6.botella/1.Marcador.png'),
+        new Bottle('img/6.botella/1.Marcador.png'),
+        new Bottle('img/6.botella/1.Marcador.png'),
+        new Bottle('img/6.botella/1.Marcador.png'),
+        new Bottle('img/6.botella/1.Marcador.png')
     ]
+
 );

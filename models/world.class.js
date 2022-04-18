@@ -65,6 +65,8 @@ class World {
 
         this.addObjectsToMap(this.level.enemies);                                       // => Lädt die Bilder aus "enemies" <=
 
+        this.addObjectsToMap(this.level.bottles);
+
         this.addObjectsToMap(this.ThrowableObjects);                                    // => Lädt die Bilder aus "ThrowableObjects" <=
 
         this.ctx.translate(-this.camera_x, 0);                                          // Bildausschnitt wird zurückgesetzt. (- = Gegenteil).
