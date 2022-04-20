@@ -36,7 +36,7 @@ document.addEventListener('keydown', (e) => {          // Setzt die Taste die ge
         keyboard.D = true;
     }
 
-    console.log(event);
+    // console.log(event);
 });
 
 document.addEventListener('keyup', (e) => {          // Setzt die Taste die losgelassen wurde auf "false"
@@ -65,5 +65,5 @@ document.addEventListener('keyup', (e) => {          // Setzt die Taste die losg
         keyboard.D = false;
     }
 
-    console.log(event);
+    // console.log(event);
 });

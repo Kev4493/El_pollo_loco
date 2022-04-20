@@ -1,8 +1,8 @@
 const level1 = new Level(
     [
-        new Chicken(),
-        new Chicken(),
-        new Chicken(),
+        // new Chicken(),
+        // new Chicken(),
+        // new Chicken(),
         new Endboss()
     ],
     [
@@ -36,11 +36,22 @@ const level1 = new Level(
 
     ],
     [
-        new Bottle('img/6.botella/1.Marcador.png'),
-        new Bottle('img/6.botella/1.Marcador.png'),
-        new Bottle('img/6.botella/1.Marcador.png'),
-        new Bottle('img/6.botella/1.Marcador.png'),
-        new Bottle('img/6.botella/1.Marcador.png')
+        new Bottle('img/6.botella/2.Botella_enterrada1.png'),
+        new Bottle('img/6.botella/2.Botella_enterrada1.png'),
+        new Bottle('img/6.botella/2.Botella_enterrada1.png'),
+        new Bottle('img/6.botella/2.Botella_enterrada1.png'),
+        new Bottle('img/6.botella/2.Botella_enterrada1.png'),
+        new Bottle('img/6.botella/2.Botella_enterrada2.png'),
+        new Bottle('img/6.botella/2.Botella_enterrada2.png'),
+        new Bottle('img/6.botella/2.Botella_enterrada2.png'),
+        new Bottle('img/6.botella/2.Botella_enterrada2.png'),
+        new Bottle('img/6.botella/2.Botella_enterrada2.png')
+    ],
+    [
+        new Coin('img/8.Coin/Moneda1.png'),
+        new Coin('img/8.Coin/Moneda1.png'),
+        new Coin('img/8.Coin/Moneda1.png'),
+        new Coin('img/8.Coin/Moneda1.png'),
+        new Coin('img/8.Coin/Moneda1.png')
     ]
-
 );
