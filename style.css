@@ -1,9 +1,36 @@
+/* fredericka-the-great-regular - latin */
+@font-face {
+    font-family: 'Fredericka the Great';
+    font-style: normal;
+    font-weight: 400;
+    src: url('../fonts/fredericka-the-great-v13-latin-regular.eot'); /* IE9 Compat Modes */
+    src: local(''),
+         url('../fonts/fredericka-the-great-v13-latin-regular.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
+         url('../fonts/fredericka-the-great-v13-latin-regular.woff2') format('woff2'), /* Super Modern Browsers */
+         url('../fonts/fredericka-the-great-v13-latin-regular.woff') format('woff'), /* Modern Browsers */
+         url('../fonts/fredericka-the-great-v13-latin-regular.ttf') format('truetype'), /* Safari, Android, iOS */
+         url('../fonts/fredericka-the-great-v13-latin-regular.svg#FrederickatheGreat') format('svg'); /* Legacy iOS */
+  }
+
 canvas {
     background-color: black;
+    background-image: url("img/9.Intro _ Outro Image/Start Screen/Opciขn 1.png");
+    background-size: 720px 480px;
+    background-repeat: no-repeat;
+    border-radius: 12px;
+    
 }
 
 body {
     display: flex;
     flex-direction: column;
     align-items: center;
+    background: linear-gradient(rgba(0, 0, 0, 0.55), rgba(0, 0, 0, 0.55)), url("img/desert-5385998_1920.png");
+}
+
+h1 {
+    font-family: 'Fredericka the Great';
+    color: #ee8530;
+    font-size: 2.5rem;
+    padding: .5rem;
 }
