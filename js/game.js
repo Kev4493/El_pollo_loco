@@ -7,8 +7,12 @@ let keyboard = new Keyboard();
 function init() {
     canvas = document.getElementById('canvas')            // Der Variable "canvas" wird das canvas aus dem HTML zugewiesen
     world = new World(canvas, keyboard);                  // Der Variable "world" wird die Klasse "World" zugewiesen und ich übergebe das canvas und das keyboard mit in die Klasse.
-
     console.log('My Character is', world.character);
+    document.getElementById('canvas').style.background = "none";
+}
+
+function fullscreen() {
+    canvas.requestFullscreen();
 }
 
 document.addEventListener('keydown', (e) => {          // Setzt die Taste die gedrückt wurde auf "true"

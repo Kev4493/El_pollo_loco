@@ -58,9 +58,11 @@ class Character extends MovableObject {                                         
 
         this.loadImages(this.IMAGES_DEAD);
 
+        this.animate();
+
         this.applyGravity();
 
-        this.animate();
+        
     }
 
     animate() {                                                                                           // ==> HIER WIRD DER CHARACTER ANIMIERT und bewegt sich in eine Richtung:
@@ -102,10 +104,5 @@ class Character extends MovableObject {                                         
                 }
             }
         }, 50);                                                                                           // Alle 50 millisekunden wird das Bild ausgetauscht => Beine des Characters bewegen sich schneller! 
-    }
-
-
-    jump() {
-        this.speedY = 30;
     }
 };

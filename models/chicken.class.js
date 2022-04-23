@@ -3,6 +3,7 @@ class Chicken extends MovableObject {                                           
     y = 350;                                                                                            // Y-Koordinate an der das Chicken-IMG ausgerichtet wird. (Wert aus MovableObject überschrieben)
     height = 80;                                                                                        // Höhe des Chicken-IMG aus MovableObject überschrieben.
     width = 70;                                                                                         // Breite des Chicken-IMG aus MovableObject überschrieben.
+    energy = 25;
 
     IMAGES_WALKING = [                                                                                  // // Lädt alle 3 Bilder unseres Chickens
 
@@ -11,28 +12,41 @@ class Chicken extends MovableObject {                                           
         'img/3.Secuencias_Enemy_b sico/Versi¢n_Gallinita (estas salen por orden de la gallina gigantona)/3.Ga_paso izquierdo.png'
     ];
 
+    IMAGE_DEAD = [
+        'img/3.Secuencias_Enemy_b sico/Versi¢n_Gallinita (estas salen por orden de la gallina gigantona)/4.G_muerte.png'
+    ];
+
     constructor() {                                                                                     // super() wird verwendet, wenn wir Methoden von einem übergeordneten Element aufrufen wollen.                                                                      
 
         super().loadImage('img/3.Secuencias_Enemy_b sico/Versi¢n_Gallinita (estas salen por orden de la gallina gigantona)/1.Ga_paso_derecho.png');     // Hier wird das Bild 1 vom Chicken geladen.
 
         this.loadImages(this.IMAGES_WALKING);                                                            // "super()" geht nur 1x danach geht auch "this"
+        this.loadImage('img/3.Secuencias_Enemy_b sico/Versi¢n_Gallinita (estas salen por orden de la gallina gigantona)/4.G_muerte.png');
 
-        this.x = 200 + Math.random() * 500;                                                              // Math.random = zufällige Zahl zw. 0 & 1 
+        this.x = 400 + Math.random() * 500;                                                              // Math.random = zufällige Zahl zw. 0 & 1 
 
         this.speed = 0.15 + Math.random() * 0.5;                                                         // Damit die Chicken mit einer random Geschwindigkeit laufen ändern wir hier den Standartwert ab.
 
         this.animate();
     }
 
+    deadChicken() {
+        this.loadImage('img/3.Secuencias_Enemy_b sico/Versi¢n_Gallinita (estas salen por orden de la gallina gigantona)/4.G_muerte.png');
+    }
+
 
     animate() {                                                                                           // ==> HIER WIRD DAS CHICKEN ANIMIERT:
 
         setInterval(() => {                                                                               // Chicken soll sich mit 60 Frames pro Sekunde nach links bewegen.
-            this.moveLeft();                                                                              // Wir rufen die Funktion aus MovableObjects auf und nutzen sie hier.
+            if(this.energy > 0) {
+                this.moveLeft();                                                                              // Wir rufen die Funktion aus MovableObjects auf und nutzen sie hier.
+            }
         }, 1000 / 60);
 
         setInterval(() => {                                                                               // Hier werden alle 3 Bilder hintereinander geladen:
-            this.playAnimation(this.IMAGES_WALKING);
+            if (this.energy > 0) {
+                this.playAnimation(this.IMAGES_WALKING);
+            }
         }, 200);
 
     }

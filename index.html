@@ -28,13 +28,39 @@
         <script src="./js/game.js"></script>
     </head>
 
-    <body onload="init()">
+    <body>
 
-        <h1>El pollo loco</h1>
+        <h1>EL POLLO LOCO</h1>
 
-        <canvas id="canvas" width="720" height="480">
+        <canvas id="canvas" width="720" height="480"></canvas>
 
-        </canvas>
+        
+
+        <div class="control-help">
+            <div onclick="fullscreen()" class="cntrl-btn hover-btn">
+                <img src="icons/fullscreen_black_48dp.svg" alt="">
+            </div>
+
+            <div onclick="init()" class="cntrl-btn hover-btn" style="width: 120px;">
+                <p>Start Game</p>
+            </div>
+
+            <div class="cntrl-btn">
+                <img src="icons/arrow_left_black_48dp.svg" alt="">
+            </div>
+
+            <div class="cntrl-btn">
+                <img src="icons/arrow_right_black_48dp.svg" alt="">
+            </div>
+
+            <div class="cntrl-btn" style="width: 96px;">
+                <img src="icons/space_bar_black_48dp.svg" alt="">
+            </div>
+
+            <div class="cntrl-btn">
+                <p>D</p>
+            </div>
+        </div>
 
     </body>
 

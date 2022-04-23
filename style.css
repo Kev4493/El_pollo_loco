@@ -12,7 +12,7 @@
          url('../fonts/fredericka-the-great-v13-latin-regular.svg#FrederickatheGreat') format('svg'); /* Legacy iOS */
   }
 
-canvas {
+#canvas {
     background-color: black;
     background-image: url("img/9.Intro _ Outro Image/Start Screen/Opciขn 1.png");
     background-size: 720px 480px;
@@ -33,4 +33,36 @@ h1 {
     color: #ee8530;
     font-size: 2.5rem;
     padding: .5rem;
+}
+
+.control-help {
+    margin-top: 2rem;
+    display: flex;
+}
+
+.hover-btn {
+    cursor: pointer;
+}
+
+.hover-btn:hover {
+    cursor: pointer;
+    background-color: #ef710b;
+}
+
+.cntrl-btn {
+    display: flex;
+    font-family: 'Fredericka the Great';
+    justify-content: center;
+    align-items: center;
+    font-size: 1.2rem;
+    font-weight: 700;
+    /* border: 2px solid black; */
+    box-shadow: 3px 6px 11px 2px rgba(0, 0, 0, 0.3);
+    display: flex;
+    border-radius: 12px;
+    background-color: #ee8530;
+    width: 48px;
+    height: 48px;
+    margin-left: 1rem;
+    margin-right: 1rem;
 }

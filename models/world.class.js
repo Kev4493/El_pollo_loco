@@ -6,6 +6,7 @@ class World {
     ctx;
     keyboard;
     camera_x = 0;                                                                       // Eine Variable für die Verschiebung des Bildausschnittes.
+    bottle = new Bottle();
 
     statusBar = new Statusbar([
         'img/7.Marcadores/Barra/Marcador vida/azul/0_.png', // 0
@@ -57,7 +58,7 @@ class World {
             this.checkThrowObjects();
             this.checkCollisionsWithBottle();
             this.checkCollisionsWithCoins();
-        }, 200);
+        }, 100);
     }
 
     checkThrowObjects() {
@@ -73,8 +74,13 @@ class World {
     checkCollisions() {
         this.level.enemies.forEach((enemy) => {
             if (this.character.isColliding(enemy)) {
-                this.character.hit();
-                this.statusBar.setPercentage(this.character.energy);
+                if (this.character.isAboveGround()) {
+                    enemy.energy = 0;
+                    enemy.deadChicken();
+                } else if (enemy.energy > 0) {
+                    this.character.hit();
+                    this.statusBar.setPercentage(this.character.energy);
+                }
             }
         });
     }
@@ -82,10 +88,11 @@ class World {
     checkCollisionsWithBottle() {
         this.level.bottles.forEach(bottle => {
             if (this.character.isColliding(bottle) && this.bottles < 100) {
-                this.bottles += 20; 
+                this.bottles += 20;
                 this.level.bottles.splice(this.level.bottles.indexOf(bottle), 1);
                 this.bottlesBar.setPercentage(this.bottles);
                 console.log('Bottles gesammelt in %: ', this.bottlesBar.percentage);
+                this.bottle.bottle_sound.play();
             }
         });
     }
@@ -93,7 +100,7 @@ class World {
     checkCollisionsWithCoins() {
         this.level.coins.forEach(coin => {
             if (this.character.isColliding(coin) && this.coins < 100) {
-                this.coins += 20; 
+                this.coins += 20;
                 this.level.coins.splice(this.level.coins.indexOf(coin), 1);
                 this.coinsBar.setPercentage(this.coins);
                 console.log('Coins gesammelt in %: ', this.coinsBar.percentage);
