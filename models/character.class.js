@@ -4,6 +4,19 @@ class Character extends MovableObject {                                         
     height = 250;                                                                                        // Höhe des Character-IMG aus MovableObject überschrieben
     speed = 10;                                                                                          // Speed wird überschrieben, damit Character schneller läuft.
 
+    IMAGES_STAND = [
+        'img/2.Secuencias_Personaje-Pepe-correcciขn/1.IDLE/IDLE/I-1.png',
+        'img/2.Secuencias_Personaje-Pepe-correcciขn/1.IDLE/IDLE/I-2.png',
+        'img/2.Secuencias_Personaje-Pepe-correcciขn/1.IDLE/IDLE/I-3.png',
+        'img/2.Secuencias_Personaje-Pepe-correcciขn/1.IDLE/IDLE/I-4.png',
+        'img/2.Secuencias_Personaje-Pepe-correcciขn/1.IDLE/IDLE/I-5.png',
+        'img/2.Secuencias_Personaje-Pepe-correcciขn/1.IDLE/IDLE/I-6.png',
+        'img/2.Secuencias_Personaje-Pepe-correcciขn/1.IDLE/IDLE/I-7.png',
+        'img/2.Secuencias_Personaje-Pepe-correcciขn/1.IDLE/IDLE/I-8.png',
+        'img/2.Secuencias_Personaje-Pepe-correcciขn/1.IDLE/IDLE/I-9.png',
+        'img/2.Secuencias_Personaje-Pepe-correcciขn/1.IDLE/IDLE/I-10.png'
+    ];
+
     IMAGES_WALKING = [                                                                                   // Lädt alle 6 Bilder unseres Characters
         'img/2.Secuencias_Personaje-Pepe-correcciขn/2.Secuencia_caminata/W-21.png',
         'img/2.Secuencias_Personaje-Pepe-correcciขn/2.Secuencia_caminata/W-22.png',
@@ -24,7 +37,7 @@ class Character extends MovableObject {                                         
         'img/2.Secuencias_Personaje-Pepe-correcciขn/3.Secuencia_salto/J-38.png',
         'img/2.Secuencias_Personaje-Pepe-correcciขn/3.Secuencia_salto/J-39.png',
         'img/2.Secuencias_Personaje-Pepe-correcciขn/3.Secuencia_salto/J-40.png'
-    ]
+    ];
 
     IMAGES_DEAD = [
         'img/2.Secuencias_Personaje-Pepe-correcciขn/5.Muerte/D-51.png',
@@ -40,7 +53,7 @@ class Character extends MovableObject {                                         
         'img/2.Secuencias_Personaje-Pepe-correcciขn/4.Herido/H-41.png',
         'img/2.Secuencias_Personaje-Pepe-correcciขn/4.Herido/H-42.png',
         'img/2.Secuencias_Personaje-Pepe-correcciขn/4.Herido/H-43.png'
-    ]
+    ];
 
     world;                                                                                               // Damit können wir auf die Variablen aus "world" zugreifen u.A auch auf das "keyboard"
     walking_sound = new Audio('audio/walk.mp3');
@@ -48,7 +61,9 @@ class Character extends MovableObject {                                         
 
     constructor() {                                                                                      // Contructor Methode wird immer ausgeführt wenn ich ein Objekt erstelle
 
-        super().loadImage('img/2.Secuencias_Personaje-Pepe-correcciขn/2.Secuencia_caminata/W-21.png');   // Mit "super().loadImage()" können wir von der übergeordneten Klasse "MovableObject" das "loadImage()" aufrufen.
+        super().loadImage('img/2.Secuencias_Personaje-Pepe-correcciขn/1.IDLE/IDLE/I-1.png');   // Mit "super().loadImage()" können wir von der übergeordneten Klasse "MovableObject" das "loadImage()" aufrufen.
+
+        this.loadImages(this.IMAGES_STAND);
 
         this.loadImages(this.IMAGES_WALKING);                                                            // "super()" geht nur 1x danach geht auch "this"
 
@@ -62,7 +77,7 @@ class Character extends MovableObject {                                         
 
         this.applyGravity();
 
-        
+
     }
 
     animate() {                                                                                           // ==> HIER WIRD DER CHARACTER ANIMIERT und bewegt sich in eine Richtung:
@@ -91,18 +106,26 @@ class Character extends MovableObject {                                         
 
 
         setInterval(() => {                                                                               // WALK ANIMATION & JUMPING ANIMATION  // Hier werden alle Bilder hintereinander geladen:
-
             if (this.isDead()) {
                 this.playAnimation(this.IMAGES_DEAD);
             } else if (this.isHurt()) {
                 this.playAnimation(this.IMAGES_HURT);
             } else if (this.isAboveGround()) {                                                            // Befindet sich der Character in der Luft?
                 this.playAnimation(this.IMAGES_JUMPING);                                                  // Dann zeigen wir diese Animation an!
-            } else {                                                                                      // ansonsten..
-                if (this.world.keyboard.RIGHT || this.world.keyboard.LEFT) {                              // Ist RIGHT oder LEFT gedrückt?
-                    this.playAnimation(this.IMAGES_WALKING);                                              // Dann zeigen wir diese Animation!
-                }
+            } else if (this.world.keyboard.RIGHT || this.world.keyboard.LEFT) {                           // ansonsten..  // Ist RIGHT oder LEFT gedrückt?                       
+                this.playAnimation(this.IMAGES_WALKING);                                                  // Dann zeigen wir diese Animation!
             }
-        }, 50);                                                                                           // Alle 50 millisekunden wird das Bild ausgetauscht => Beine des Characters bewegen sich schneller! 
+        }, 100);                                                                                          // Alle 50 millisekunden wird das Bild ausgetauscht => Beine des Characters bewegen sich schneller! 
+
+        this.playStandAnimation();
+    }
+
+
+    playStandAnimation() {
+        setInterval(() => {
+            if (!this.isAboveGround() && !this.world.keyboard.LEFT && !this.world.keyboard.RIGHT) {
+                this.playAnimation(this.IMAGES_STAND);
+            }
+        }, 200);
     }
 };

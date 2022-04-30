@@ -23,9 +23,9 @@ class Chicken extends MovableObject {                                           
         this.loadImages(this.IMAGES_WALKING);                                                            // "super()" geht nur 1x danach geht auch "this"
         this.loadImage('img/3.Secuencias_Enemy_b sico/Versi¢n_Gallinita (estas salen por orden de la gallina gigantona)/4.G_muerte.png');
 
-        this.x = 400 + Math.random() * 500;                                                              // Math.random = zufällige Zahl zw. 0 & 1 
+        this.x = 600 + Math.random() * 3000;                                                              // Math.random = zufällige Zahl zw. 0 & 1 
 
-        this.speed = 0.15 + Math.random() * 0.5;                                                         // Damit die Chicken mit einer random Geschwindigkeit laufen ändern wir hier den Standartwert ab.
+        this.speed = 1 + Math.random() * 2;                                                         // Damit die Chicken mit einer random Geschwindigkeit laufen ändern wir hier den Standartwert ab.
 
         this.animate();
     }
@@ -39,7 +39,7 @@ class Chicken extends MovableObject {                                           
 
         setInterval(() => {                                                                               // Chicken soll sich mit 60 Frames pro Sekunde nach links bewegen.
             if(this.energy > 0) {
-                this.moveLeft();                                                                              // Wir rufen die Funktion aus MovableObjects auf und nutzen sie hier.
+                this.moveLeft();                                                                           // Wir rufen die Funktion aus MovableObjects auf und nutzen sie hier.
             }
         }, 1000 / 60);
 

@@ -19,7 +19,7 @@ class DrawableObject {
     }
 
     drawFrame(ctx) {
-        if (this instanceof Character || this instanceof Chicken) {                               // Funktion wird nur für die 2 Klassen angewendet
+        if (this instanceof Character || this instanceof Chicken || this instanceof Endboss) {              // Funktion wird nur für die 3 Klassen angewendet
             ctx.beginPath();
             ctx.lineWidth = '5';
             ctx.strokeStyle = 'blue';

@@ -7,6 +7,8 @@ class World {
     keyboard;
     camera_x = 0;                                                                       // Eine Variable für die Verschiebung des Bildausschnittes.
     bottle = new Bottle();
+    coin = new Coin();
+    endboss = new Endboss();
 
     statusBar = new Statusbar([
         'img/7.Marcadores/Barra/Marcador vida/azul/0_.png', // 0
@@ -48,9 +50,11 @@ class World {
         this.run();
     }
 
+
     setWorld() {
         this.character.world = this;                                                    // Damit können wir von der Klasse Character auf die Klasse World zugreifen.
     }
+
 
     run() {
         setInterval(() => {
@@ -58,8 +62,19 @@ class World {
             this.checkThrowObjects();
             this.checkCollisionsWithBottle();
             this.checkCollisionsWithCoins();
+            this.checkIfBottleHitsEnemy();
+            this.checkPepeMeetsEndboss();
         }, 100);
     }
+
+    checkPepeMeetsEndboss() {
+        if (this.endboss.x - this.character.x <= 350) {
+            console.log('Endboss has recognize Character')
+            // this.endboss.animateAlertness();
+            this.endboss.status = 'alert';
+        }
+    }
+
 
     checkThrowObjects() {
         if (this.keyboard.D && this.bottles > 0) {
@@ -70,6 +85,7 @@ class World {
             this.ThrowableObjects.push(bottle);
         }
     }
+
 
     checkCollisions() {
         this.level.enemies.forEach((enemy) => {
@@ -85,6 +101,7 @@ class World {
         });
     }
 
+
     checkCollisionsWithBottle() {
         this.level.bottles.forEach(bottle => {
             if (this.character.isColliding(bottle) && this.bottles < 100) {
@@ -97,13 +114,29 @@ class World {
         });
     }
 
+
     checkCollisionsWithCoins() {
         this.level.coins.forEach(coin => {
             if (this.character.isColliding(coin) && this.coins < 100) {
                 this.coins += 20;
                 this.level.coins.splice(this.level.coins.indexOf(coin), 1);
                 this.coinsBar.setPercentage(this.coins);
+                this.coin.coin_sound.play();
                 console.log('Coins gesammelt in %: ', this.coinsBar.percentage);
+            }
+        });
+    }
+
+    checkIfBottleHitsEnemy() {
+        this.ThrowableObjects.forEach(object => {
+            if (object.isColliding(this.endboss)) {
+                console.log('bottle has hit end boss', this.endboss);
+                this.endboss.status = 'hurt';
+                this.endboss.energy -= 25;
+                console.log('Endboss Energy =', this.endboss.energy);
+            }
+            if (this.endboss.energy <= 0) {
+                this.endboss.status = 'dead';
             }
         });
     }
@@ -131,6 +164,8 @@ class World {
         this.addToMap(this.character);                                                  // => Lädt die Bilder aus "character" <=
 
         this.addObjectsToMap(this.level.enemies);                                       // => Lädt die Bilder aus "enemies" <=
+
+        this.addToMap(this.endboss);
 
         this.addObjectsToMap(this.level.bottles);
 
@@ -177,9 +212,9 @@ class World {
         mo.x = mo.x * -1;
     }
 
+
     flipImageBack(mo) {
         mo.x = mo.x * -1;
         this.ctx.restore();                                                          // änderungen werden wieder Rückgängig gemacht.    
     }
-
 }

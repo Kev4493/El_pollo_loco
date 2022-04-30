@@ -3,6 +3,7 @@ class Coin extends DrawableObject {
     y = 300;
     height = 150;
     width = 150;
+    coin_sound = new Audio('audio/coin.mp3');
 
     constructor(path) {
         super().loadImage(path);
