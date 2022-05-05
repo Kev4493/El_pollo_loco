@@ -4,8 +4,7 @@ class Endboss extends MovableObject {
     width = 300;
     y = -25;
     x = 2500;
-    // dead = false;
-    energy = 100;
+    energy = 200;
 
     IMAGES_WALKING = [
         'img/4.Secuencias_Enemy_gigantขn-Doคa_Gallinota-/1.Caminata/G1.png',
@@ -48,8 +47,6 @@ class Endboss extends MovableObject {
         'img/4.Secuencias_Enemy_gigantขn-Doคa_Gallinota-/4.Muerte/G26.png'
     ];
 
-    status = 'alive';
-
 
     constructor() {
         super().loadImage(this.IMAGES_ALERTNESS[0]);
@@ -59,61 +56,19 @@ class Endboss extends MovableObject {
         this.loadImages(this.IMAGES_HURT);
         this.loadImages(this.IMAGES_DEAD);
         this.animate();
-
-        // this.animateAlertness();
     }
+
 
     animate() {
+
         setInterval(() => {
-            if (this.status = 'alive') {
-                this.loadImage(this.IMAGES_ALERTNESS[0])
-            } else
-            if (this.status = 'alert') {
-                this.playAnimation(this.IMAGES_ALERTNESS)
-            }
-            if (this.status = 'hurt') {
-                this.playAnimation(this.IMAGES_HURT)
-            }
-            if (this.status = 'dead') {
+            if (this.isDead()) {
                 this.playAnimation(this.IMAGES_DEAD);
+            } else if (this.isHurt()) {
+                this.playAnimation(this.IMAGES_HURT);
+            } else {
+                this.playAnimation(this.IMAGES_ALERTNESS);
             }
-        }, 300);
+        }, 180);
     }
-
-
-
-
-
-
-
-
-
-
-    // animateAlertness() {
-    //     setInterval(() => {
-    //         if(this.status = "alert") {
-    //             this.playAnimation(this.IMAGES_ALERTNESS);
-    //         }
-    //     }, 800);
-    // }
-
-
-    // animateDead() {
-    //     this.dead = true;
-
-    //     setInterval(() => {
-    //         this.x += 20;
-    //         this.y -= 20;
-    //         this.playAnimation(this.IMAGES_DEAD);
-    //     }, 400);
-    // }
-
-
-    // animateHurt() {
-    //     if(!this.dead) {
-    //         setInterval(() => {
-    //             this.playAnimation(this.IMAGES_HURT)
-    //         }, 300);
-    //     }
-    // }
 }

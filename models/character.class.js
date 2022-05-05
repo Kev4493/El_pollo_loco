@@ -60,28 +60,18 @@ class Character extends MovableObject {                                         
 
 
     constructor() {                                                                                      // Contructor Methode wird immer ausgeführt wenn ich ein Objekt erstelle
-
         super().loadImage('img/2.Secuencias_Personaje-Pepe-correcciขn/1.IDLE/IDLE/I-1.png');   // Mit "super().loadImage()" können wir von der übergeordneten Klasse "MovableObject" das "loadImage()" aufrufen.
 
         this.loadImages(this.IMAGES_STAND);
-
         this.loadImages(this.IMAGES_WALKING);                                                            // "super()" geht nur 1x danach geht auch "this"
-
         this.loadImages(this.IMAGES_JUMPING);
-
         this.loadImages(this.IMAGES_HURT);
-
         this.loadImages(this.IMAGES_DEAD);
-
         this.animate();
-
         this.applyGravity();
-
-
     }
 
     animate() {                                                                                           // ==> HIER WIRD DER CHARACTER ANIMIERT und bewegt sich in eine Richtung:
-
         setInterval(() => {                                                                               // Character bewegt sich nach rechts:
             this.walking_sound.pause();
 
@@ -90,17 +80,14 @@ class Character extends MovableObject {                                         
                 this.otherDirection = false;                                                              // Beim Rechts laufen soll nicht gespiegelt werden
                 this.walking_sound.play();
             }
-
             if (this.world.keyboard.LEFT && this.x > 0) {                                                 // Character bewegt sich nach links wenn LEFT gedrückt ist und X-Koordinate > 0 ist.
                 this.moveLeft();                                                                          // Wir rufen die Funktion aus MovableObects auf.
                 this.otherDirection = true;                                                               // Bild wird gespiegelt beim links laufen.
                 this.walking_sound.play();
             }
-
             if (this.world.keyboard.SPACE && !this.isAboveGround()) {                                      // Ist die Pfeiltaste nach OBEN gedrückt und unser Character ist NICHT über dem Boden?
                 this.jump();                                                                               // Dann spring!
             }
-
             this.world.camera_x = -this.x + 100;
         }, 1000 / 60);
 

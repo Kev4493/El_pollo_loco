@@ -8,7 +8,7 @@ class World {
     camera_x = 0;                                                                       // Eine Variable für die Verschiebung des Bildausschnittes.
     bottle = new Bottle();
     coin = new Coin();
-    endboss = new Endboss();
+    endboss = level1.endboss[0];
 
     statusBar = new Statusbar([
         'img/7.Marcadores/Barra/Marcador vida/azul/0_.png', // 0
@@ -62,16 +62,15 @@ class World {
             this.checkThrowObjects();
             this.checkCollisionsWithBottle();
             this.checkCollisionsWithCoins();
-            this.checkIfBottleHitsEnemy();
             this.checkPepeMeetsEndboss();
+            this.checkIfBottleHitsEnemy();
+            this.checkIfEndbossIsDead();
         }, 100);
     }
 
     checkPepeMeetsEndboss() {
         if (this.endboss.x - this.character.x <= 350) {
-            console.log('Endboss has recognize Character')
-            // this.endboss.animateAlertness();
-            this.endboss.status = 'alert';
+            console.log('Endboss has recognize Character');
         }
     }
 
@@ -127,18 +126,24 @@ class World {
         });
     }
 
+
     checkIfBottleHitsEnemy() {
         this.ThrowableObjects.forEach(object => {
             if (object.isColliding(this.endboss)) {
                 console.log('bottle has hit end boss', this.endboss);
-                this.endboss.status = 'hurt';
                 this.endboss.energy -= 25;
+                this.endboss.hit();
                 console.log('Endboss Energy =', this.endboss.energy);
             }
-            if (this.endboss.energy <= 0) {
-                this.endboss.status = 'dead';
-            }
         });
+    }
+
+
+    checkIfEndbossIsDead() {
+        if (this.endboss.energy <= 0) {
+            this.endboss.status = 'dead';
+            console.log('Status =',  this.endboss.status);
+        }
     }
 
 
