@@ -64,12 +64,12 @@ class World {
             this.checkCollisionsWithCoins();
             this.checkPepeMeetsEndboss();
             this.checkIfBottleHitsEnemy();
-            this.checkIfEndbossIsDead();
         }, 100);
     }
 
     checkPepeMeetsEndboss() {
         if (this.endboss.x - this.character.x <= 350) {
+            this.endboss.pepeNearEndboss = true;
             console.log('Endboss has recognize Character');
         }
     }
@@ -136,14 +136,6 @@ class World {
                 console.log('Endboss Energy =', this.endboss.energy);
             }
         });
-    }
-
-
-    checkIfEndbossIsDead() {
-        if (this.endboss.energy <= 0) {
-            this.endboss.status = 'dead';
-            console.log('Status =',  this.endboss.status);
-        }
     }
 
 
