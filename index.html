@@ -32,17 +32,21 @@
 
         <h1>EL POLLO LOCO</h1>
 
-        <canvas id="canvas" width="720" height="480"></canvas>
+        <div id="endscreen" class="endscreen d-none" width="720px" height="480px"></div>
 
-        
+        <canvas id="canvas" width="720" height="480"></canvas>
 
         <div class="control-help">
             <div onclick="fullscreen()" class="cntrl-btn hover-btn">
                 <img src="icons/fullscreen_black_48dp.svg" alt="">
             </div>
 
-            <div onclick="init()" class="cntrl-btn hover-btn" style="width: 120px;">
+            <div id="start-game" onclick="init()" class="cntrl-btn hover-btn" style="width: 140px;">
                 <p>Start Game</p>
+            </div>
+
+            <div id="restart-game" onclick="" class="cntrl-btn hover-btn d-none" style="width: 140px;">
+                <a href="index.html"><p>Restart Game</p></a>
             </div>
 
             <div class="cntrl-btn">

@@ -1,5 +1,4 @@
 class World {
-
     character = new Character();                                                        // Der Variable "character" wird das "Character-Objekt" zugewiesen.
     level = level1;                                                                     // Damit können wir auf alle Variablen aus unserem Level zugreifen.
     canvas;
@@ -64,13 +63,13 @@ class World {
             this.checkCollisionsWithCoins();
             this.checkPepeMeetsEndboss();
             this.checkIfBottleHitsEnemy();
+            this.endscreen();
         }, 100);
     }
 
     checkPepeMeetsEndboss() {
         if (this.endboss.x - this.character.x <= 350) {
             this.endboss.pepeNearEndboss = true;
-            console.log('Endboss has recognize Character');
         }
     }
 
@@ -136,6 +135,20 @@ class World {
                 console.log('Endboss Energy =', this.endboss.energy);
             }
         });
+    }
+
+    gameOver() {
+        setTimeout(() => {
+            document.getElementById('endscreen').classList.remove('d-none');
+            document.getElementById('start-game').classList.add('d-none');
+            document.getElementById('restart-game').classList.remove('d-none');
+        }, 1000);
+    }
+
+    endscreen() {
+        if (this.endboss.energy == 0) {
+            this.gameOver();
+        }
     }
 
 
@@ -214,4 +227,7 @@ class World {
         mo.x = mo.x * -1;
         this.ctx.restore();                                                          // änderungen werden wieder Rückgängig gemacht.    
     }
+
+
+
 }

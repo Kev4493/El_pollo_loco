@@ -4,9 +4,10 @@ class Endboss extends MovableObject {
     width = 300;
     y = -25;
     x = 2500;
-    energy = 200;
+    energy = 100;
     pepeNearEndboss = false;
-    speed = 10;
+    speed = 5;
+    world;
 
     IMAGES_WALKING = [
         'img/4.Secuencias_Enemy_gigantขn-Doคa_Gallinota-/1.Caminata/G1.png',
@@ -63,10 +64,6 @@ class Endboss extends MovableObject {
 
     animate() {
 
-        if (this.pepeNearEndboss) {
-            this.playAnimation(this.IMAGES_ALERTNESS);
-        }
-
         setInterval(() => {
             if (this.isDead()) {
                 this.playAnimation(this.IMAGES_DEAD);
@@ -77,8 +74,6 @@ class Endboss extends MovableObject {
                 this.moveLeft();
             }
         }, 100);
-
-
     }
 
 }

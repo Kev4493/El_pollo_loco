@@ -26,6 +26,7 @@ body {
     flex-direction: column;
     align-items: center;
     background: linear-gradient(rgba(0, 0, 0, 0.55), rgba(0, 0, 0, 0.55)), url("img/desert-5385998_1920.png");
+    position: relative;
 }
 
 h1 {
@@ -56,7 +57,6 @@ h1 {
     align-items: center;
     font-size: 1.2rem;
     font-weight: 700;
-    /* border: 2px solid black; */
     box-shadow: 3px 6px 11px 2px rgba(0, 0, 0, 0.3);
     display: flex;
     border-radius: 12px;
@@ -66,3 +66,27 @@ h1 {
     margin-left: 1rem;
     margin-right: 1rem;
 }
+
+.endscreen {
+    background-image: url("img/9.Intro _ Outro Image/_Game over_ screen/4.Game over!.png"), url("img/5.Fondo/1.png");
+    background-repeat: no-repeat;
+    background-size: 720px 480px;
+    width: 720px;
+    height: 480px;
+    position: absolute;
+    border-radius: 12px;
+    top: 118.6px;
+}
+
+.d-none {
+    display: none;
+}
+
+a {
+    text-decoration: none;
+    color: black;
+}
+
+
+
+
