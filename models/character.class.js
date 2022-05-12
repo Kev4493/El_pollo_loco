@@ -3,6 +3,7 @@ class Character extends MovableObject {                                         
     y = 180;                                                                                             // Y-Koordinate an der das Character-IMG ausgerichtet wird. (Wert aus MovableObject überschrieben)
     height = 250;                                                                                        // Höhe des Character-IMG aus MovableObject überschrieben
     speed = 10;                                                                                          // Speed wird überschrieben, damit Character schneller läuft.
+    energy = 100;
 
     IMAGES_STAND = [
         'img/2.Secuencias_Personaje-Pepe-correcciขn/1.IDLE/IDLE/I-1.png',

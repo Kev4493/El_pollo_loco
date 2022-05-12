@@ -64,6 +64,7 @@ class World {
             this.checkPepeMeetsEndboss();
             this.checkIfBottleHitsEnemy();
             this.endscreen();
+            this.checkCollisionsWithEndboss();
         }, 100);
     }
 
@@ -112,6 +113,13 @@ class World {
         });
     }
 
+    checkCollisionsWithEndboss() {
+        if (this.character.isColliding(this.endboss)) {
+            this.character.hit();
+            this.statusBar.setPercentage(this.character.energy);
+        }
+    }
+
 
     checkCollisionsWithCoins() {
         this.level.coins.forEach(coin => {
@@ -146,7 +154,7 @@ class World {
     }
 
     endscreen() {
-        if (this.endboss.energy == 0) {
+        if (this.endboss.energy == 0 || this.character.energy == 0) {
             this.gameOver();
         }
     }
@@ -207,7 +215,7 @@ class World {
 
         mo.draw(this.ctx);
 
-        mo.drawFrame(this.ctx);                                                          // Funktion für den Rectangle. Blauer Rand um die Objekte.
+        // mo.drawFrame(this.ctx);                                                       // Funktion für den Rectangle. Blauer Rand um die Objekte.
 
         if (mo.otherDirection) {                                                         // ist otherDirection auf true?
             this.flipImageBack(mo);
