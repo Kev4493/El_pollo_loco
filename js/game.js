@@ -5,14 +5,55 @@ let keyboard = new Keyboard();
 
 
 function init() {
+    initLevel();
+    touchBtn();
     canvas = document.getElementById('canvas')            // Der Variable "canvas" wird das canvas aus dem HTML zugewiesen
     world = new World(canvas, keyboard);                  // Der Variable "world" wird die Klasse "World" zugewiesen und ich übergebe das canvas und das keyboard mit in die Klasse.
     console.log('My Character is', world.character);
     document.getElementById('canvas').style.background = "none";
+    document.getElementById('touch-panel-header').classList.add('d-none');
+    document.getElementById('touch-panel').classList.remove('d-none');
+    document.getElementById('start-game').classList.add('d-none');
+    document.getElementById('fullscreen-btn').classList.remove('d-none');
+    document.getElementById('restart-game').classList.remove('d-none');
 }
 
 function fullscreen() {
     canvas.requestFullscreen();
+}
+
+function touchBtn() {
+    document.getElementById('btnLeft').addEventListener('touchstart', (e) => {
+        keyboard.LEFT = true;
+    });
+
+    document.getElementById('btnLeft').addEventListener('touchend', (e) => {
+        keyboard.LEFT = false;
+    });
+
+    document.getElementById('btnRight').addEventListener('touchstart', (e) => {
+        keyboard.RIGHT = true;
+    });
+
+    document.getElementById('btnRight').addEventListener('touchend', (e) => {
+        keyboard.RIGHT = false;
+    });
+
+    document.getElementById('btnJump').addEventListener('touchstart', (e) => {
+        keyboard.SPACE = true;
+    });
+
+    document.getElementById('btnJump').addEventListener('touchend', (e) => {
+        keyboard.SPACE = false;
+    });
+
+    document.getElementById('btnThrow').addEventListener('touchstart', (e) => {
+        keyboard.D = true;
+    });
+
+    document.getElementById('btnThrow').addEventListener('touchend', (e) => {
+        keyboard.D = false;
+    });
 }
 
 document.addEventListener('keydown', (e) => {          // Setzt die Taste die gedrückt wurde auf "true"
@@ -61,7 +102,7 @@ document.addEventListener('keyup', (e) => {          // Setzt die Taste die losg
         keyboard.DOWN = false;
     }
 
-    if (e.keyCode == 32) { 
+    if (e.keyCode == 32) {
         keyboard.SPACE = false;
     }
 

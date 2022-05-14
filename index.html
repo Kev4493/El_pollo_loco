@@ -32,12 +32,45 @@
 
         <h1>EL POLLO LOCO</h1>
 
-        <div id="endscreen" class="endscreen d-none" width="720px" height="480px"></div>
+        <div class="canvas-container">
 
-        <canvas id="canvas" width="720" height="480"></canvas>
+            <div id="endscreen" class="endscreen d-none" width="720px" height="480px"></div>
+
+            <div id="touch-panel-header" class="touch-panel-header">
+                <div class="cntrl-btn-touch-header" onclick="init()">
+                    <!-- <img src="icons/play_circle_FILL0_wght400_GRAD0_opsz48.svg" alt="" width="40px"> -->
+                    <p class="blinking">Start Game</p>
+                </div>
+            </div>
+
+            <div id="touch-panel" class="touch-panel d-none">
+
+                <div class="touchpanel-left">
+                    <div id="btnLeft" class="cntrl-btn cntrl-btn-touch">
+                        <img src="icons/arrow_left_black_48dp.svg" alt="">
+                    </div>
+                    <div id="btnRight" class="cntrl-btn cntrl-btn-touch">
+                        <img src="icons/arrow_right_black_48dp.svg" alt="">
+                    </div>
+                </div>
+
+                <div class="touchpanel-right">
+                    <div id="btnJump" class="cntrl-btn cntrl-btn-touch">
+                        <img src="icons/arrow_drop_up_FILL1_wght400_GRAD0_opsz48.svg" alt="">
+                    </div>
+                    <div id="btnThrow" class="cntrl-btn cntrl-btn-touch">
+                        <img src="icons/forward_FILL0_wght400_GRAD0_opsz48.svg" alt="" width="35px">
+                    </div>
+                </div>
+            </div>
+    
+            <canvas id="canvas" width="720" height="480"></canvas>
+        </div>
+
+
 
         <div class="control-help">
-            <div onclick="fullscreen()" class="cntrl-btn hover-btn">
+            <div onclick="fullscreen()" id="fullscreen-btn" class="cntrl-btn hover-btn d-none">
                 <img src="icons/fullscreen_black_48dp.svg" alt="">
             </div>
 

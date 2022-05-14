@@ -149,7 +149,8 @@ class World {
         setTimeout(() => {
             document.getElementById('endscreen').classList.remove('d-none');
             document.getElementById('start-game').classList.add('d-none');
-            document.getElementById('restart-game').classList.remove('d-none');
+            // document.getElementById('restart-game').classList.remove('d-none');
+            document.getElementById('touch-panel').classList.add('d-none');
         }, 1000);
     }
 
