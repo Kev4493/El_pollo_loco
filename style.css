@@ -167,6 +167,7 @@ a {
     }
 }
 
+
 @media only screen and (max-height: 480px) {
     canvas {
         height: 100vh;
@@ -184,5 +185,31 @@ a {
 @media (min-width: 900px) {
     .touch-panel {
         display: none;
+    }
+}
+
+@media (max-width: 415px) {
+    canvas {
+        display: none !important;
+    }
+
+    .control-help {
+        display: none;
+    }
+
+    .blinking {
+        display: none;
+    }
+
+    .turn-device-text {
+        display: block;
+        font-size: 1.5rem;
+    }
+
+    .canvas-container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
     }
 }

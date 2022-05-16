@@ -11,7 +11,7 @@ function init() {
     world = new World(canvas, keyboard);                  // Der Variable "world" wird die Klasse "World" zugewiesen und ich übergebe das canvas und das keyboard mit in die Klasse.
     console.log('My Character is', world.character);
     document.getElementById('canvas').style.background = "none";
-    document.getElementById('touch-panel-header').classList.add('d-none');
+    document.getElementById('blinking-start-text').classList.add('d-none');
     document.getElementById('touch-panel').classList.remove('d-none');
     document.getElementById('start-game').classList.add('d-none');
     document.getElementById('fullscreen-btn').classList.remove('d-none');

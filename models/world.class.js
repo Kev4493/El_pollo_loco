@@ -151,6 +151,7 @@ class World {
             document.getElementById('start-game').classList.add('d-none');
             // document.getElementById('restart-game').classList.remove('d-none');
             document.getElementById('touch-panel').classList.add('d-none');
+            document.getElementById('blinking-restart-text').classList.remove('d-none');
         }, 1000);
     }
 
