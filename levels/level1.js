@@ -3,12 +3,12 @@ let level1;
 function initLevel() {
     level1 = new Level(
         [
-            // new Chicken(),
-            // new Chicken(),
-            // new Chicken(),
-            // new Chicken(),
-            // new Chicken(),
-            // new Chicken(),
+            new Chicken(),
+            new Chicken(),
+            new Chicken(),
+            new Chicken(),
+            new Chicken(),
+            new Chicken(),
         ],
         [
             new Endboss()
@@ -57,6 +57,16 @@ function initLevel() {
             new Bottle('img/6.botella/2.Botella_enterrada2.png'),
             new Bottle('img/6.botella/2.Botella_enterrada2.png'),
             new Bottle('img/6.botella/2.Botella_enterrada2.png'),
+            new Bottle('img/6.botella/2.Botella_enterrada2.png'),
+            new Bottle('img/6.botella/2.Botella_enterrada2.png'),
+            new Bottle('img/6.botella/2.Botella_enterrada2.png'),
+            new Bottle('img/6.botella/2.Botella_enterrada2.png'),
+            new Bottle('img/6.botella/2.Botella_enterrada2.png'),
+            new Bottle('img/6.botella/2.Botella_enterrada2.png'),
+            new Bottle('img/6.botella/2.Botella_enterrada2.png'),
+            new Bottle('img/6.botella/2.Botella_enterrada2.png'),
+            new Bottle('img/6.botella/2.Botella_enterrada2.png'),
+            new Bottle('img/6.botella/2.Botella_enterrada2.png'),
             new Bottle('img/6.botella/2.Botella_enterrada2.png')
         ],
         [
@@ -68,6 +78,8 @@ function initLevel() {
             new Coin('img/8.Coin/Moneda1.png'),
             new Coin('img/8.Coin/Moneda1.png'),
             new Coin('img/8.Coin/Moneda1.png'),
+            new Coin('img/8.Coin/Moneda1.png'),
+            new Coin('img/8.Coin/Moneda1.png')
         ]
     );
 }

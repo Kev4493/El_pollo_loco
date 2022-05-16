@@ -79,7 +79,7 @@ class World {
         if (this.keyboard.D && this.bottles > 0) {
             this.bottles -= 20;
             this.bottlesBar.setPercentage(this.bottles);
-            console.log('Bottles noch übrig in %: ', this.bottlesBar.percentage);
+            // console.log('Bottles noch übrig in %: ', this.bottlesBar.percentage);
             let bottle = new ThrowableObject(this.character.x + 100, this.character.y + 100);
             this.ThrowableObjects.push(bottle);
         }
@@ -103,8 +103,8 @@ class World {
 
     checkCollisionsWithBottle() {
         this.level.bottles.forEach(bottle => {
-            if (this.character.isColliding(bottle) && this.bottles < 100) {
-                this.bottles += 20;
+            if (this.character.isColliding(bottle) && this.bottles <= 150) {
+                this.bottles += 10;
                 this.level.bottles.splice(this.level.bottles.indexOf(bottle), 1);
                 this.bottlesBar.setPercentage(this.bottles);
                 console.log('Bottles gesammelt in %: ', this.bottlesBar.percentage);
@@ -124,11 +124,11 @@ class World {
     checkCollisionsWithCoins() {
         this.level.coins.forEach(coin => {
             if (this.character.isColliding(coin) && this.coins < 100) {
-                this.coins += 20;
+                this.coins += 10;
                 this.level.coins.splice(this.level.coins.indexOf(coin), 1);
                 this.coinsBar.setPercentage(this.coins);
                 this.coin.coin_sound.play();
-                console.log('Coins gesammelt in %: ', this.coinsBar.percentage);
+                // console.log('Coins gesammelt in %: ', this.coinsBar.percentage);
             }
         });
     }
@@ -137,8 +137,8 @@ class World {
     checkIfBottleHitsEnemy() {
         this.ThrowableObjects.forEach(object => {
             if (object.isColliding(this.endboss)) {
-                console.log('bottle has hit end boss', this.endboss);
-                this.endboss.energy -= 25;
+                // console.log('bottle has hit end boss', this.endboss);
+                this.endboss.energy -= 5;
                 this.endboss.hit();
                 console.log('Endboss Energy =', this.endboss.energy);
             }
